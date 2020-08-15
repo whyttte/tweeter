@@ -1,6 +1,82 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
+$(document).ready(() => {
+  
+  const loadTweets = function () {
+    $.get("/tweets")
+    .then((tweets) => {
+      renderTweets(tweets)
+    })
+  }
+
+  const renderTweets = function (tweets) {
+    for (const tweet of tweets) {
+      const tweetElement = createTweetElement(tweet)
+      // Main container for tweets
+      $(".tweet-container").prepend(tweetElement)
+    }
+  }
+
+
+
+  const $form = $(".submit-tweet")
+  $form.on("submit", function (event) {
+    event.preventDefault();
+    const tweet = $(this).serialize();
+    if (!formValidation()) {
+      $('#counter').val("140");
+      $("#compose")[0].reset();
+      return;
+    }
+    $.post("/tweets", tweet)
+    .then((tweet) => {
+      loadTweets();
+      $('#counter').val("140");
+      $("#compose")[0].reset();
+  
+    })
+  })
+
+  const formValidation = function () {
+
+    const $tweetedData = $("#tweet-text").val();
+    console.log($tweetedData)
+    if ($tweetedData.length > 140) {
+      $(".container").prepend($("<div>").addClass("tweet-error").text("Too many characters, please limit your text to 140 Characters").fadeIn(200).fadeOut(3000))
+      return;
+    } else if (!$tweetedData || $tweetedData === null) {
+      $(".container").prepend($("<div>").addClass("tweet-error").text("Please send a valid tweet by typing some letters").fadeIn(200).fadeOut(3000))
+      return false;
+    } else {
+      return $tweetedData;
+    }
+  }
+
+
+  const createTweetElement = function (tweetObject) {
+    const $tweet = `<article class="tweet">
+    <div class="tweet-header">
+      <div>
+        <img src=${tweetObject.user.avatars}>
+        <h2>${tweetObject.user.name}</h2>
+      </div>
+        <span>${tweetObject.user.handle}</span>
+    </div>
+    <div class="the-body">
+      <p>${tweetObject.content.text}</p>
+    </div>
+    <footer>
+      <p>${tweetObject.created_at}</p>
+      <div>
+        <i class="fas fa-flag"></i>
+        <i class="fa fa-retweet" aria-hidden="true"></i>
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      </div>
+    </footer>
+  </article>
+  `;
+    return $tweet;
+  }
+
+  loadTweets();
+  
+});
 
