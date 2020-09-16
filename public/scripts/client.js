@@ -1,3 +1,21 @@
+const getTime = function(date) {
+  let currentDate = Date.now();
+  let seconds = (currentDate - date) / 1000;
+  var minutes = seconds / 60;
+  var hours = minutes / 60;
+  if (minutes < 1) {
+    return `${Math.floor(seconds)} seconds ago`;
+  } else if (minutes > 1 && minutes < 60) {
+    return `${Math.floor(minutes)} minutes ago`;
+  } else if (minutes > 60 && hours < 24) {
+    return `${Math.floor(hours)} hours ago`;
+  } else if (hours > 24) {
+    return `${Math.floor(hours / 24)} days ago`;
+  }
+}
+
+
+
 $(document).ready(() => {
 
 
@@ -14,9 +32,9 @@ $(document).ready(() => {
       <p>${tweetObject.content.text}</p>
     </div>
     <footer>
-      <p>${tweetObject.created_at}</p>
+      <p>${getTime(tweetObject.created_at)}</p>
       <div>
-        <i class="fas fa-flag"></i>
+        <i class="fa fa-flag" aria-hidden="true"></i>
         <i class="fa fa-retweet" aria-hidden="true"></i>
         <i class="fa fa-heart" aria-hidden="true"></i>
       </div>
@@ -28,11 +46,12 @@ $(document).ready(() => {
 
 
   const renderTweets = function (tweets) {
+    $(".tweet-container").empty();
     for (const tweet of tweets) {
       const tweetElement = createTweetElement(tweet);
       // Main container for tweets
-      $(".tweet-container").prepend(tweetElement);
-    }
+        $(".tweet-container").prepend(tweetElement);
+    } 
   };
 
   

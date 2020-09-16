@@ -19,6 +19,14 @@ article.tweet {
   border-radius: 5px;
 }
 
+article.tweet:hover {
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+article.tweet:hover footer div {
+  visibility: visible;
+}
+
 article footer {
   display: flex;
 
@@ -106,6 +114,7 @@ footer {
 
  footer div {
   display: flex;
+  visibility: hidden;
   flex-direction: row;
   justify-content: space-evenly;
   width: 80px;
