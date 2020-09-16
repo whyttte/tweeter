@@ -1,8 +1,3 @@
-// $(document).ready(function(event) => {
-//   console.log("nothing happening");
-// });
-
-
 $(document).ready(function() {
   $("#tweet-text").on("keyup", function() {
     let typedCharacters = $(this).val().length;
@@ -15,8 +10,6 @@ $(document).ready(function() {
     } else {
       newCounter.style.color = "black";
       newCounter = $(".counter").text(unsedCharacters)
-    }
-    
+    } 
   })
-
 });

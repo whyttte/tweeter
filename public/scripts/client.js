@@ -1,3 +1,5 @@
+// function getTime takes in date in milli seconds 
+// and returns a readeable time in secs/mins/hrs/days ago
 const getTime = function(date) {
   let currentDate = Date.now();
   let seconds = (currentDate - date) / 1000;
@@ -13,8 +15,6 @@ const getTime = function(date) {
     return `${Math.floor(hours / 24)} days ago`;
   }
 }
-
-
 
 $(document).ready(() => {
 
@@ -44,8 +44,8 @@ $(document).ready(() => {
     return $tweet;
   }
 
-
   const renderTweets = function (tweets) {
+    // Need to empty container to avoid duplication of tweets
     $(".tweet-container").empty();
     for (const tweet of tweets) {
       const tweetElement = createTweetElement(tweet);
@@ -54,17 +54,14 @@ $(document).ready(() => {
     } 
   };
 
-  
   const loadTweets = function () {
     $.get("/tweets")
     .then((tweets) => {
       renderTweets(tweets)
     });
   };
-
-  
+ 
   const formValidation = function () {
-
     const $tweetedData = $("#tweet-text").val();
     console.log($tweetedData)
     if ($tweetedData.length > 140) {
@@ -77,7 +74,6 @@ $(document).ready(() => {
       return $tweetedData;
     }
   };
-
 
   const $form = $(".submit-tweet");
   $form.on("submit", function (event) {
@@ -96,10 +92,6 @@ $(document).ready(() => {
       $("#compose")[0].reset();
     })
   })
-
-  
-
-  
 
   loadTweets();
   
