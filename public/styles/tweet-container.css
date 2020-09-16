@@ -2,9 +2,6 @@
   display: flex;
   flex-direction: column;
   background-color: #deecea;
-  
-  /* height: 250px; */
-  
   margin-top: 20px;
 }
 
@@ -29,7 +26,6 @@ article.tweet:hover footer div {
 
 article footer {
   display: flex;
-
 }
 
 .tweet {
@@ -45,8 +41,8 @@ article footer {
   justify-content: space-between;
   align-items: center;
   background-color: #deecea;
- 
 }
+
 .tweet-header div {
   display: flex;
   flex-direction: row;
@@ -62,7 +58,6 @@ article footer {
   margin-right: 10px;
 }
 
-
 .tweet .tweet-header img {
   height: 50px;
   margin-right: 30px;
@@ -73,7 +68,6 @@ article footer {
 .tweet .tweet-header span {
   margin-right: 50px;
   color: #89b1afa1;
-
 }
 
 .the-body {
@@ -84,7 +78,6 @@ article footer {
   background-color: #deecea;
   border-width: 1px;
   padding: 0;
-
 }
 
 .the-body p {
@@ -99,20 +92,20 @@ footer {
   margin-left: 10px;
   margin-right: 10px;
   height: 40px;
-  border-top: solid;
-  
+  border-top: solid; 
 }
- footer p {
-   display: flex;
-   flex-direction: column;
-   align-content: flex-end;
-   align-items: center;
-   margin-top: 5px;
-   margin-left: 20px;
-   font-size: 50%;
- }
 
- footer div {
+footer p {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  align-items: center;
+  margin-top: 5px;
+  margin-left: 20px;
+  font-size: 50%;
+}
+
+footer div {
   display: flex;
   visibility: hidden;
   flex-direction: row;
@@ -121,7 +114,4 @@ footer {
   margin-top: 5px;
   margin-right: 20px;
   font-size: 60%;
-  
-   
-   
- }
+}
